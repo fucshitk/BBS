@@ -1,0 +1,86 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+		<script type="text/javascript" src="{% static 'js/jquery.js' %}"></script>
+		<script type="text/javascript" src="{% static 'js/bootstrap.js' %}"></script>
+		<link rel="stylesheet" href="{% static 'css/bootstrap.css' %}" />
+		<link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap-theme.css' %}" />
+        <link rel='icon' type='image/icon' href='{% static 'icon/to1.ico' %}'>
+		<link rel="stylesheet" type="text/css" href="{% static 'css/swiper.css' %}" />
+		<script type="text/javascript" src="{% static 'js/swiper.js' %}"></script>
+		<link rel="stylesheet" type="text/css" href="{% static 'css/reset.css' %}" />
+        <title>(๑◔‿◔๑)层楼 | 登录-少年不识愁滋味，爱上层楼。爱上层楼。</title>
+		<style type="text/css">
+            body {
+                padding-top: 50px;
+                background-position: center;
+                background-repeat: no-repeat;
+                background-attachment: fixed;
+                }
+			.form-info h2 {
+				font-size: 2rem;
+				margin-bottom: 20px;
+			}
+			
+            .submit {
+				text-align: center;
+                margin-top: 30px;
+			}
+            form{
+                width: 300px;
+                padding:20px;
+                padding-bottom: 35px;
+                margin-left: 900px;
+                margin-top:50px;
+                border: solid 1px white;
+                border-radius: 10px
+            }
+            #vc{
+                width: 120px;
+                float: left;
+            }
+            img{
+                margin-right: 5px;
+                float: right;
+            }
+
+		</style>
+        <script type="text/javascript">
+            $(function () {
+                $('#vicode').click(function(){
+                    $(this).attr('src','/bbs/getvcode'+Math.random())
+                })
+            })
+        </script>
+	</head>
+
+{#	<body style="background-image: url('http://www.baisu.com/images/banner.jpg')">#}
+	<body style="background-image: url('{% static "img/login.jpg" %}')">
+        <form method="post" action="{% url 'app:login' %}">
+
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="exampleInputEmail1">用户名</label>
+                <input type="text" class="form-control" id="exampleInputEmail1" name="uname" placeholder="请输入用户名">
+
+            </div>
+            <div class="form-group">
+                <label for="exampleInputPassword1">密码</label>
+                <input type="password" class="form-control" name="upwd" placeholder="请输入密码">
+            </div>
+            <label for="exampleInputVcode">验证码</label>
+            <div class="form-group" style="overflow: hidden;border: solid 1px #CCCCCC;border-radius: 5px">
+                &nbsp;&nbsp;<input type="text"  class="form-control" name="vcode" id='vc' placeholder="不区分大小写" style="border: none">
+                &nbsp;&nbsp;<img src="/bbs/getvcode" id="vicode" title="点击图片更换验证码,输错返回请刷新验证码">
+            </div>
+            <div class="submit"><button type="submit" class="btn btn-primary" style="width: 250px;">登录</button></div>
+            <p style="margin-top: 5px;float: right">没有账号?<a href="{% url 'app:register' %}">免费注册</a></p>
+        </form>
+	</body>
+
+</html>

@@ -1,0 +1,211 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {# 让页面宽度自动等于设备的宽度（移动APP常用配置） #}
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,user-scalable=no">
+    <title>(๑◔‿◔๑) {% block title %}散文{% endblock %} | 层楼</title>
+    <link rel='icon' type='x-image/icon' href='{% static 'icon/to1.ico' %}'>
+    <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/reset.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'css/home.css' %}"/>
+    <script type="text/javascript" src="{% static 'js/home.js' %}" ></script>
+    <style type="text/css">
+            body {
+                padding-top: 50px;
+                background-position: left;
+                background-repeat: no-repeat;
+                background-attachment: fixed;
+                background-size: 1502px 700px;
+                }
+            .cs{color:#f00;}
+            {% block css %}
+            {% endblock %}
+    </style>
+    <script type="text/javascript" src="{% static 'js/fishc.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/sanwen.js' %}"></script>
+    <script src="https://cdn.bootcss.com/jquery/3.3.0/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+{#<body style="background-image: url('http://www.baisu.com/images/banner.jpg')">#}
+<body id="top" style="background-image: url('{% static "img/bili.png" %}')">
+    {#导航#}
+    {% block nav %}
+    <nav class="navbar navbar-default navbar-fixed-top" style="border-radius: 0px;box-shadow: 0px 5px 5px #c8c8c8;background-color: #F1F1F0">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="" style="font-size: 24px;margin-left: 20px">
+{#              <p style='@font-face {#}
+{#                      font-family: "Microsoft YaHei", "Helvetica Neue", Helvetica, STHeiTi, Arial, sans-serif;#}
+{#                      src: "{% static 'fonts/maobi.ttf' %}";#}
+{#              }'>层楼</p>#}
+              <strong>层楼</strong>
+          </a>
+        </div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav">
+            <li><a href="{% url 'app:shici' %}" style="font-size: 16px">首页</a></li>
+          </ul>
+            <form class="navbar-form navbar-left" role="search" method="get" id="searchform" action="{% url 'app:search' %}" target="_blank">
+            {% csrf_token %}
+            <div class="form-group">
+              <input type="search" class="form-control" name="q" placeholder="搜文章">
+            </div>
+            <button type="submit" class="btn btn-default">搜索</button>
+          </form>
+            <ul class="nav navbar-nav navbar-right">
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" style="width: 160px;text-align: center">个人中心<span class="caret"></span></a>
+                      <ul class="dropdown-menu" style="text-align: center;width: auto">
+                        <li style="margin: 10px">
+                           <img width="40" height="40" class="img-circle" alt="" src="{{ uicon }}" />
+                        &nbsp;  <span>{{ uname }}</span>
+                        </li>
+
+                        <li><a href="{% url 'app:mine' %}">资料</a></li>
+                        <li><a href="{% url 'app:set' %}">设置</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="{% url 'app:logout' %}">退出</a></li>
+                      </ul>
+                <li><a href="{% url 'app:about' %}">关于</a></li>
+            </ul>
+        </div>
+      </div>
+    </nav>
+  {% endblock %}
+    {# 背景图片 #}
+{#    <div style="height: 150px;width: 1000px;margin:auto;margin-top: 10px;background-image: url('{% static 'img/welcome.gif' %}');background-size: 1000px 150px"></div>#}
+    {#主体#}
+    <div id="mian" class="row" style="width: 1200px;margin-right: 0px;text-align:center;margin: auto;background-color: #F1F1F0">
+        {% block main %}
+{#            <iframe src="http://www.nicetool.net/embed/screen_clock.html" width="100%" height="570px;" scrolling="no" style="border:0px;"></iframe>#}
+{#            <iframe src="http://www.nicetool.net/embed/simple_note.html" width="100%" height="450px;" scrolling="no" style="border:0px;"></iframe>#}
+            <div class="col-xs-3 col-sm-3 col-md-3" id="left" style="padding-left: 100px;">
+                <div class="n" style="box-shadow: 0px 5px 15px #c8c8c8;position: fixed;width: 185px">
+                 <ul class="nav nav-pills nav-stacked">
+                      <li role="presentation"><a href="">&nbsp;</a></li>
+                      <li role="presentation" class="{% block shici %}{% endblock %}"><a href="{%url 'app:shici' %}">诗词</a></li>
+                      <li role="presentation" class="{% block sanwen %}active{% endblock %}"><a href="{% url 'app:sanwen' %}">散文</a></li>
+                      <li role="presentation" class="{% block xiaoshuo %}{% endblock %}"><a href="{% url 'app:xiaoshuo' %}">小说</a></li>
+                      <li role="presentation" class="{% block yuyan %}{% endblock %}"><a href="{% url 'app:yuyan' %}">寓言</a></li>
+                      <li role="presentation" class="{% block tonghua %}{% endblock %}"><a href="{% url 'app:tonghua' %}">童话</a></li>
+                      <li role="presentation" class="{% block rizhi %}{% endblock %}"><a href="{% url 'app:rizhi' %}">日志</a></li>
+                      <li role="presentation" class="{% block duanzi %}{% endblock %}"><a href="{% url 'app:duanzi' %}">段子</a></li>
+                      <li role="presentation" class="{% block chuishui %}{% endblock %}"><a href="{% url 'app:chuishui' %}">吹水</a></li>
+                </ul>
+                </div>
+            </div>
+            <div class="col-xs-9 col-sm-9 col-md-9" id="right" style="margin-bottom:600px;">
+                {% block content %}
+                    <div id="box1" style="margin-top: 20px">
+                        {# 小导航 #}
+                        <ul class="nav nav-tabs child-nav" style="margin: 0;width: 740px">
+
+                            <li role="presentation" class="active">
+                                <a href="">最新推荐</a>
+                            </li>
+{#                            <li role="presentation">#}
+{#                                <a href="">收藏</a>#}
+{#                            </li>#}
+                            <li style="float: right">
+                                <a href="{% url 'app:addact' %}" target="_blank" style="height: 40px">
+                                    <img src="{% static 'icon/xiezuo.png' %}" style="width: 25px">
+                                    写作
+                                </a>
+                            </li>
+                        </ul>
+                        {% if not arts %}
+                            <div style="margin: 25px 0;width: 750px;">
+                            <h1 style="margin-top: 50px">暂无内容……</h1>
+                            </div>
+                        {% else %}
+                        {% for art in  arts %}
+                                <div style="box-shadow: 0px 5px 15px #c8c8c8;margin: 25px 0;width: 750px;padding: 10px">
+                                    <ul class="dropdown">
+                                      <li style="margin: 10px;text-align: left">
+                                        <a style="font-size: 20px;text-decoration: none" target="_blank" href="{% url 'app:ta' art.author.id %}">
+                                            <img width="40" height="40" class="img-circle" title="{{ art.author }}" src="http://127.0.0.1:8000/uploads/{{ art.author.uicon }}" />
+                                            <strong style="text-decoration: none;">{{ art.author }}</strong>
+                                        </a>
+                                          <span style="font-size: 10px;margin-left: 10px">{{ art.add_time | date:'Y-m-d H:i:s'}}</span>
+                                      </li>
+                                    </ul>
+
+                                    {# 内容 #}
+                                    <div class="movie_list" style="margin: 20px;width: 666px; text-align: left;">
+                                        <a target="_blank" href="{% url 'app:readart' art.id %}" title="{{ art.title|safe }}" style="font-size: 18px;color: #07141e;margin-left: 20px;text-decoration: none">
+                                            <strong>{{ art.title|safe }}</strong>
+                                        </a>
+
+                                            <div class="movie_list_right" style="width: 600px">
+
+                                                <div class="movie-intro" style="text-indent: 2em;font-family:'微软雅黑';line-height:2em;word-spacing:10px;margin: 10px;overflow:hidden;text-overflow:ellipsis;display: -webkit-box;-webkit-line-clamp: 4;-webkit-box-orient: vertical;height: auto">
+                                                    {{ art.content|safe }}
+                                                </div>
+                                            </div>
+                                            <div class="movie-like" style="margin-right: 30px;width: 670px;text-align: right">&nbsp;&nbsp;
+{#                                                <span class="glyphicon glyphicon-heart-empty" onclick="$(this).attr('class','glyphicon glyphicon-heart');"></span>#}
+{#                                                <a href="{% url 'app:like'  art.id %}" id="like" style="cursor: default;" class="like" >&#10084;</a>#}
+{#                                                <span artid="{{ art.id }}" style="cursor: default;" class="like" onclick="$(this).attr('class','cs');$(this).next('.num').html(n++)">&#10084;</span>#}
+{#                                                <span id="num" class="num">0</span>#}
+                                            </div>
+                                    </div>
+                                </div>
+                        {% endfor %}
+                    {% endif %}
+                    </div>
+                {% endblock %}
+            </div>
+            {% block footer %}
+            <footer id="site-footer">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <p class="copyright" style="margin-bottom: 20px">&copy; 2017 zhegewangzhanbuhaoji.com</p>
+                        </div>
+                    </div>
+                </div>
+		    </footer>
+            {% endblock %}
+        {% endblock %}
+    </div>
+    <div id="scrollSearchDiv" style="position:fixed;bottom: 80px;right: 10px;width: 50px;line-height: 50px;background-color: #fff;text-align: center;font-size: 40px;">
+        <a href="#top" style="text-decoration: none;width: 30px;"><img src="{% static 'icon/back_top.png'%}" style="width:30px;height: 30px;margin-bottom: 10px"></a>
+    </div>
+    <script type="text/javascript">
+         $(function () {
+            //绑定滚动条事件
+              //绑定滚动条事件
+            $(window).bind("scroll", function () {
+                var sTop = $(window).scrollTop();
+                var sTop = parseInt(sTop);
+                if (sTop >= 130) {
+                    if (!$("#scrollSearchDiv").is(":visible")) {
+                        try {
+                            $("#scrollSearchDiv").slideDown();
+                        } catch (e) {
+                            $("#scrollSearchDiv").show();
+                        }
+                    }
+                }
+                else {
+                    if ($("#scrollSearchDiv").is(":visible")) {
+                        try {
+                            $("#scrollSearchDiv").slideUp();
+                        } catch (e) {
+                            $("#scrollSearchDiv").hide();
+                        }
+                    }
+                }
+            });
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,105 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>(๑◔‿◔๑)层楼 | 注册-少年不识愁滋味，爱上层楼。爱上层楼。</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <link rel='icon' type='image/icon' href='{% static 'icon/to1.ico' %}'>
+    <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet">
+    <script src="{% static 'js/bootstrap.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/jquery.js' %}"></script>
+
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap-theme.css' %}" />
+
+    <link rel="stylesheet" type="text/css" href="{% static 'css/swiper.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'css/reset.css' %}" />
+    <style type="text/css">
+        body {
+            padding-top: 50px;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: 960px 600px;
+        }
+        .form-info {
+            border: 1px solid orange;
+            margin: 100px auto;
+            width: 30%;
+            padding: 50px;
+        }
+
+        .form-info h2{
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+        .form-info .submit{
+            text-align: center;
+        }
+        form{
+            width: 300px;
+            padding:20px;
+            margin-left: 900px;
+            margin-top:40px;
+            border: solid 1px white;
+            border-radius: 10px;
+        }
+        .vcode{
+            height: 35px;
+            line-height: 35px;
+            border-radius: 5px;
+        }
+        #vc{
+                width: 120px;
+                float: left;
+                font-size: 14px;
+        }
+        img{
+            margin-right: 5px;
+            float: right;
+        }
+
+    </style>
+    <script type="text/javascript">
+        $(function () {
+            $('#vvcode').click(function(){
+                $(this).attr('src','/bbs/getvcode'+Math.random())
+            })
+        });
+{#        $(function check_input() {#}
+{##}
+{#            var password = $("#password").val();#}
+{#            $("#password").val(md5(password));#}
+{##}
+{#            return true#}
+{#        });#}
+    </script>
+</head>
+{#<body style="background-image: url('http://www.baisu.com/images/banner.jpg')">#}
+<body style="background-image: url('{% static "img/register.jpg" %}')">
+    <form method="post" action="{% url 'app:register' %}" onsubmit="return check_input()" >
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="exampleInputEmail1">用户名<span style="margin-left: 100px;float: right">已有账号，<a href="{% url 'app:login' %}">立即登录</a></span></label>
+            <input type="text" class="form-control" name="uname" id="exampleInputEmail1" placeholder="请输入用户名">
+
+        </div>
+        <div class="form-group">
+            <label for="exampleInputPassword1">密码</label>
+            <input type="password" class="form-control" name="upwd" placeholder="请输入密码">
+
+        </div>
+        <div class="form-group">
+            <label for="exampleInputPassword1">确认密码</label>
+            <input type="password" class="form-control" name="upwd2" placeholder="请再次输入密码">
+
+        </div>
+        <label for="exampleInputVcode">验证码</label>
+        <div class="form-group" style="overflow: hidden;border: solid 1px #CCCCCC;border-radius: 5px">
+            &nbsp;&nbsp;<input type="text"  class="form-control" name="vcode" id='vc' placeholder="不区分大小写" style="border: none">
+            &nbsp;&nbsp;<img src="/bbs/getvcode" id="vvcode" title="点击图片更换验证码,输错返回请刷新验证码">
+        </div>
+        <div class="submit" style="text-align: center;margin-top: 20px"><button type="submit" class="btn btn-primary" style="width: 250px">注册并登录</button></div>
+    </form>
+</body>
+</html>

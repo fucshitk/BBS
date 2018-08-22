@@ -1,0 +1,41 @@
+{% extends 'sanwen.html' %}
+{% load static %}
+
+{% block title %}{{ art.title }}{% endblock %}
+
+
+{% block main %}
+    <div style="box-shadow: 0px 15px 15px #c8c8c8;width: 800px;margin: auto">
+        <div class="title" style="padding: 80px 0 20px 0;margin:auto;width: 800px;text-align: center;font-size: 20px">
+            <strong>{{ art.title }}</strong>
+        <p style="margin-left: 400px;margin-top:10px;font-size: 13px">{{ art.add_time }}</p>
+        </div>
+        <div style="width: 800px;text-indent: 2em;font-family:'微软雅黑';line-height:2em;word-spacing:10px;margin: auto;text-align: left;padding: 10px 40px 50px;">
+            {{ art.content|safe }}
+        </div>
+    </div>
+    <div style="margin-top: 30px;margin-bottom: 0px">
+        <form method="post" action="{% url 'app:readart' art.id %} " style="width: 800px;margin: auto">
+            {% csrf_token %}
+            <div class="form-group" style="width: 550px;height: 60px;">
+                <p style="text-align: left;font-size: 18px;margin-bottom: 5px">评论</p>
+                <input type="text" class="form-control" name="pinglun" placeholder="我也说一句…" style="width: 420px;float: left">
+                <input type="submit" class="btn btn-primary" value="发表" style="width: 50px;float: left;margin-left: 20px">
+            </div>
+        </form>
+    </div>
+    {% for c in com %}
+        <div class="comment" style="padding: 10px;width: 800px;margin: auto;">
+            <ul class="dropdown">
+              <li style="margin: 0px;text-align: left">
+                <a style="font-size: 16px">
+                    <img width="40" height="40" class="img-circle" title="{{ c.belong_user }}" src="http://127.0.0.1:8000/uploads/{{ c.belong_user.uicon }}" />
+                    <strong>{{ c.belong_user }}</strong>
+                </a>
+                  ：{{ c.pinglun }}
+                <p style="float: right;height: 40px;line-height: 40px;font-size: 12px">{{ c.add_time }}</p>
+              </li>
+            </ul>
+        </div>
+    {% endfor %}
+{% endblock %}

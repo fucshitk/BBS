@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+
+</head>
+<body>
+    <h2 id="ntfText" >就绪</h2></br>
+    <button type="button" class="btn btn-success" id="btnTerminalSvr">关闭服务器</button>
+    <script type="text/javascript">
+     $('#btnTerminalSvr').on('click', function () {
+        alert('嘿，我听说您点击了按钮...' );
+      });
+    </script>
+    <script type="text/javascript">
+     $("#btnTerminalSvr").click(function(){
+         $.ajax({
+            url: './terminal_svr',
+            type: 'POST',
+            data: {},
+            dataType: 'json',
+            timeout: 10000,
+            success: function(result) {
+            if ( result.result == "post_success" ) {
+              $("#ntfText").html("发起成功");
+            }else {
+              $("#ntfText").html("重复发起了");
+            }
+            }
+           });
+      });
+    </script>
+</body>
+</html>

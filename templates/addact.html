@@ -1,0 +1,63 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>写文章 | (๑◔‿◔๑)层楼</title>
+    <link rel='icon' type='image/icon' href='{% static 'icon/to1.ico' %}'>
+    <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <!--富文本-->
+{#    <script src='/static/tiny_mce/tiny_mce.js'></script>#}
+{#    <script>#}
+{#        tinyMCE.init({#}
+{#            'mode': 'textareas',#}
+{#            'theme': 'advanced',#}
+{#            'width': 750,#}
+{#            'height': 500,#}
+{#            'language': 'zh',#}
+{#            'style_formats': [#}
+{#                {'title': 'Bold text', 'inline': 'b'},#}
+{#                {'title': 'Red text', 'inline': 'span', 'styles': {'color': '#ff0000'}},#}
+{#                {'title': 'Red header', 'block': 'h1', 'styles': {'color': '#ff0000'}},#}
+{#                {'title': 'Example 1', 'inline': 'span', 'classes': 'example1'},#}
+{#                {'title': 'Example 2', 'inline': 'span', 'classes': 'example2'},#}
+{#                {'title': 'Table styles'},#}
+{#                {'title': 'Table row 1', 'selector': 'tr', 'classes': 'tablerow1'}#}
+{#            ],#}
+{#        })#}
+{#    </script>#}
+    <link rel="stylesheet" type="text/css" href="/ueditor/UE/third-party/SyntaxHighlighter/shCoreDefault.css">
+    <script type="text/javascript" src="/ueditor/UE/third-party/SyntaxHighlighter/shCore.js"></script>
+    <script type="text/javascript" src="/ueditor/UE/ueditor.config.js"></script>
+    <script type="text/javascript" src="/ueditor/UE/ueditor.all.min.js"></script>
+    <script type="text/javascript" src="/ueditor/UE/lang/zh-cn/zh-cn.js"></script>
+
+{#    <script type="text/javascript">#}
+{#    	var ue = UE.getEditor('editor');#}
+{#    	SyntaxHighlighter.all();#}
+{#    </script>#}
+</head>
+<body  style="background-color: #F1F1F0;">
+    <div class="bianji" style="margin: auto;width:750px;">
+        <form method='post' action="{% url 'app:addact' %}">
+            {% csrf_token %}
+            <div class="form-group" style="width: 750px;height: 500px">
+                <input type="text" class="form-control" name="title" placeholder="请输入标题" style="width: 750px;margin: 20px 0;height: 50px">
+                <textarea id="editor" type="text/plain" style="width:750px;height:400px;padding: 10px" name="content" placeholder="请输入正文"></textarea>
+                <div class="type" style="margin-top: 5px;display: block;width: 750px;height: 32px;line-height: 32px;font-size: 15px">
+                    请选择文章类型：<input type="radio" name="A_type" value="1">诗词
+                        <input type="radio" name="A_type" value="2">散文
+                        <input type="radio" name="A_type" value="3">小说
+                        <input type="radio" name="A_type" value="4">寓言
+                        <input type="radio" name="A_type" value="5">童话
+                        <input type="radio" name="A_type" value="6">日志
+                        <input type="radio" name="A_type" value="7">段子
+                        <input type="radio" name="A_type" value="8">吹水
+                    <input type="submit" class="btn btn-primary" value="发表" style="width: 50px;float: right;margin: 5px 0 0 0 ">
+                </div>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

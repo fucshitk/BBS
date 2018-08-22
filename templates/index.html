@@ -1,0 +1,163 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>首页</title>
+    <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/reset.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'css/home.css' %}"/>
+    <script type="text/javascript" src="{% static 'js/home.js' %}" ></script>
+    <style type="text/css">
+        body {
+            padding-top: 50px;
+
+        }
+    </style>
+    <script src="https://cdn.bootcss.com/jquery/3.3.0/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+    {#导航#}
+    <nav class="navbar  navbar-fixed-top navbar-inverse" style="border-radius: 0px">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">xx论坛</a>
+        </div>
+
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li><a href="/">首页</a></li>
+            </ul>
+            <form class="navbar-form navbar-left">
+                <div class="form-group">
+                  <input type="text" class="form-control" placeholder="Search">
+                </div>
+                <button type="submit" class="btn btn-default">搜索</button>
+            </form>
+            <ul class="nav navbar-nav navbar-right">
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">个人中心<span class="caret"></span></a>
+                      <ul class="dropdown-menu">
+                          <li style="margin: 10px">
+                            <img width="40" height="40" class="img-circle" alt="" src="{{ uicon }}" />
+                            &nbsp;<span>{{ uname }}</span>
+                          </li>
+
+                          <li><a href="#">资料</a></li>
+                          <li><a href="#">设置</a></li>
+                          <li role="separator" class="divider"></li>
+                          <li><a href="/">退出</a></li>
+                      </ul>
+                <li><a href="#">关于</a></li>
+            </ul>
+        </div>
+      </div>
+    </nav>
+
+{#    主体#}
+    <div id="mian" class="row" style="width: 1200px;margin-right: 0px;text-align:center;margin: auto;background-color: #F1F1F0">
+        <div class="col-xs-3 col-sm-3 col-md-3" id="left" style="padding: 0px;border-radius: 0px ">
+             <ul class="nav nav-pills nav-stacked" >
+                  <li role="presentation" class="active"><a>&nbsp;</a></li>
+                  <li role="presentation"><a href="{%url 'app:shici' %}">诗词</a></li>
+                  <li role="presentation"><a href="{% url 'app:sanwen' %}">散文</a></li>
+                  <li role="presentation"><a href="{% url 'app:xiaoshuo' %}">小说</a></li>
+                  <li role="presentation"><a href="{% url 'app:yuyan' %}">寓言</a></li>
+                  <li role="presentation"><a href="{% url 'app:tonghua' %}">童话</a></li>
+                  <li role="presentation"><a href="{% url 'app:rizhi' %}">日志</a></li>
+                  <li role="presentation"><a href="{% url 'app:duanzi' %}">段子</a></li>
+                  <li role="presentation"><a href="{% url 'app:chuishui' %}">吹水</a></li>
+            </ul>
+        </div>
+        <div class="col-xs-9 col-sm-9 col-md-9" id="right" style="background-color: #F1F1c0;margin: 0">
+
+                {# 按钮 #}
+                <div class="btn-toolbar" role="group" aria-label="..." style="margin-top: 10px">
+                    <button type="button" class="btn btn-link">更多</button>
+                </div>
+
+
+                <div id="box1" style="margin-top: 20px">
+                    {# 小导航 #}
+                    <ul class="nav nav-tabs child-nav" style="margin: 0">
+
+                        <li role="presentation" class="active">
+                            <a href="#">最新推荐</a>
+                        </li>
+                        <li role="presentation">
+                            <a href="#">收藏</a>
+                        </li>
+
+                    </ul>
+
+                    {% for art in  arts %}
+                        {% for  uicon in uiconList %}
+                            <div style="box-shadow: 0px 15px 15px #c8c8c8;margin: 40px 0">
+                                <ul class="dropdown">
+                                  <li style="margin: 10px;text-align: left">
+                                    <a style="font-size: 18px">
+                                        <img width="40" height="40" class="img-circle" title="{{ art.author }}" src="http://127.0.0.1:8000/uploads/{{ uicon }}" />
+                                        <strong>{{ art.author }}</strong>
+                                    </a>
+                                  </li>
+                                </ul>
+                                    {# 内容 #}
+                                <ul class="movie_list" style="margin: 10px;width: 800px; text-align: left">
+                                    <a target="_blank" href="" title="{{ art.title }}" style="font-size: 20px;color: #07141e;margin-left: 20px">
+                                        <strong>{{ art.title }}</strong>
+                                    </a>
+                                    <li>
+                                        {#<div class="movie_list_left">#}
+                                        {#<a target="_blank" href="#" title="{{ art.title }}">#}
+                                        {#  <img src="{{ uicons }}">#}
+                                        {#  <div class="bottom-cover">#}
+                                        {#      <span class="film-time">02:48</span>#}
+                                        {#  </div>#}
+                                        {#</a>#}
+                                        {#</div>#}
+
+                                        <div class="movie_list_right">
+
+                                            <div class="movie-intro" style="margin-top: 0px;overflow:hidden;text-overflow:ellipsis;display: -webkit-box;-webkit-line-clamp: 8;-webkit-box-orient: vertical;height: 150px">
+                                                {{ art.content }}
+                                            </div>
+                                            <div class="movie-like" style="margin-left: 650px">
+                                                <span class="glyphicon glyphicon-heart" onclick="$(this).css('background-color','red');var a=0;function num() {a++;document.getElementsByClassName('num').innerText=a;}"></span>
+                                                <span class="num">199</span>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        {% endfor %}
+                    {% endfor %}
+
+                    {% for uicon in uiconList %}
+                        <div class="dropdown" style="float: left;width: 60px;height: 300px">
+                            <img src="http://127.0.0.1:8000/uploads/{{uicon }}" style="width: 40px;height: 40px">
+                        </div>
+                    {% endfor %}
+
+
+                    {% for a in arts %}
+                        <div style="float: right">
+                        <span>{{ a.author }}</span>
+                        <strong>{{ a.title }}</strong>
+                        <span>{{ a.content }}</span>
+                        </div>
+                    {% endfor %}
+                </div>
+
+        </div>
+    </div>
+
+</body>
+</html>

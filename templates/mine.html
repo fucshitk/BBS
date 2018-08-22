@@ -1,0 +1,37 @@
+{% extends 'sanwen.html' %}
+{% load static %}
+
+{% block title %}{{ uname }}{% endblock %}
+
+{% block main %}
+    <div style="height: 250px;width: 1000px;margin:auto;margin-top: 10px;background-image: url('{{ bgimg }}');background-size: 1000px 250px">
+        <img class="icon" src="{{ uicon }}"style="width: 150px;height: 150px;float: left;margin-top: 190px;margin-left: 20px;border-radius: 50%">
+    </div>
+    <div style="width: 1000px;height:700px;text-align: left;margin: auto;margin-top: 0px">
+        <ul class="dropdown">
+            <li>
+                <strong style="font-size: 50px;margin-left: 20px">{{ uname }}</strong>
+                <strong style="margin-left: 30px;font-size: 17px">个性签名：</strong>{{ user.signature }}
+                <strong style="margin-left: 30px;font-size: 17px">电话：</strong>{{ user.mobile }}
+            </li>
+            <li>
+                <strong style="font-size: 15px;margin-left: 20px">性别：</strong>{{ user.gender }}
+                <strong style="margin-left: 30px;font-size: 17px">邮箱：</strong>{{ user.email }}
+                <a href="{% url 'app:set' %}" style="float: right;line-height: 30px;font-size: 16px;border: solid 1px ;border-radius: 5px;margin-right: 10px;padding: 5px;text-decoration: none">编辑个人资料</a>
+            </li>
+        </ul>
+{#        <ul style="margin:30px 0 0 35px;line-height: 30px;font-size: 18px">#}
+{#            <li>#}
+{#                个性签名：{{ user.signature }}#}
+{#            </li>#}
+{#            <li>#}
+{#                电话：{{ user.mobile }}#}
+{#            </li>#}
+{#            <li>#}
+{#                邮箱：{{ user.email }}#}
+{#            </li>#}
+{#            <li></li>#}
+{#            <li></li>#}
+{#        </ul>#}
+    </div>
+{% endblock %}

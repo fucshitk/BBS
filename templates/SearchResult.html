@@ -1,0 +1,26 @@
+{% extends 'sanwen.html' %}
+
+{% block title %}搜索结果{% endblock %}
+{% block main %}
+  {% if error_msg %}
+    <h3 style="margin-top: 50px">{{ error_msg }}</h3>
+  {% endif %}
+
+  {% for art in post_list %}
+    <div style="box-shadow: 0px 15px 15px #c8c8c8;width: 800px;margin: auto">
+        <div class="title" style="padding: 80px 0 20px 0;margin:auto;width: 800px;text-align: center;font-size: 20px">
+            <strong>{{ art.title }}</strong>
+        <p style="margin-left: 400px;margin-top:10px;font-size: 13px">{{ art.add_time }}</p>
+        </div>
+        <div style="width: 800px;text-indent: 2em;font-family:'微软雅黑';line-height:2em;word-spacing:10px;margin: auto;text-align: left;padding: 10px 40px 50px;">
+            {{ art.content|safe }}
+        </div>
+    </div>
+  {% empty %}
+    <div style="box-shadow: 0px 15px 15px #c8c8c8;width: 800px;margin: auto">
+        <div class="title" style="padding: 80px 0 20px 0;margin:auto;width: 800px;text-align: center;font-size: 20px">
+            <strong>暂无发布的文章！</strong>
+        </div>
+    </div>
+  {% endfor %}
+{% endblock main %}
