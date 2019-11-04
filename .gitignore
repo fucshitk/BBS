@@ -1,0 +1,16 @@
+env
+test.py
+db.sqlite3
+App/migrations/
+.idea
+App/__pycache__/
+Bank/__pycache__/
+DjangoUeditor/__pycache__/
+__pycache__/
+likes/__pycache__/
+ueditor/__pycache__/
+xadmin/__pycache__/
+xadmin/migrations/__pycache__/
+xadmin/plugins/__pycache__/
+xadmin/templatetags/__pycache__/
+xadmin/views/__pycache__/
