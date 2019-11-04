@@ -334,7 +334,6 @@ def set(request):
         user.email = email
         user.bgimg = bgimg
         user.save()
-        print(type(user.uicon))
         data = {
             'uname': uname,
             'uicon': 'http://127.0.0.1:8000/uploads/'+str(user.uicon),
